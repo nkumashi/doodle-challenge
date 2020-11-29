@@ -1,0 +1,7 @@
+.settings/
+.target/
+.gitignore
+.classpath
+.project
+Dockerfile
+HELP.md
