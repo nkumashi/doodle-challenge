@@ -1,16 +1,18 @@
 version: '3'
 services: 
   server:
+    image: naveenkumashi/chat-demo-server
     container_name: chat-demo-server
     restart: always
     build: ./chat-demo-server
     ports: 
-      - '8181:8181'
+      - '8080:8181'
   client:
+    image: naveenkumashi/chat-demo-client
     container_name: chat-demo-client
     restart: always
     build: ./chat-demo-client
     ports: 
       - '4200:4200'
     links: 
-      - chat-demo-server
+      - server
