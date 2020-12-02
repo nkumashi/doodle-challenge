@@ -1,16 +1,13 @@
 package com.chat.challenge.repository;
 
 import com.chat.challenge.model.ChatMessage;
-import com.chat.challenge.model.ChatMessage.MessageStatus;
-import org.springframework.data.mongodb.repository.MongoRepository;
 
 import java.util.List;
 
-public interface ChatMessageRepository
-        extends MongoRepository<ChatMessage, String> {
+import org.springframework.data.mongodb.repository.MongoRepository;
+import org.springframework.stereotype.Repository;
 
-    long countBySenderIdAndRecipientIdAndStatus(
-            String senderId, String recipientId, MessageStatus status);
-
-    List<ChatMessage> findByChatId(String chatId);
+@Repository
+public interface ChatMessageRepository extends MongoRepository<ChatMessage, String> {
+	public List<ChatMessage> findAll();
 }

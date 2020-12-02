@@ -1,12 +1,14 @@
 package com.chat.challenge.repository;
 
-import com.chat.challenge.model.ChatRoom;
 import java.util.Optional;
 
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Repository;
 
+import com.chat.challenge.model.ChatUser;
+
 @Repository
-public interface ChatRoomRepository extends MongoRepository<ChatRoom, String> {
-	Optional<ChatRoom> findByRoomName(String roomname);
+public interface ChatUserRepository extends MongoRepository<ChatUser, String> {
+
+	Optional<ChatUser> findByUsername(String username);
 }

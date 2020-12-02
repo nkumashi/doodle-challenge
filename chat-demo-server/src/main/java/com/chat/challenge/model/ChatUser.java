@@ -17,15 +17,13 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Builder
 @Document
-public class ChatRoom {
+public class ChatUser {
 	@Id
-	private String roomId;
-	private String roomName;
-	private String topic;  
+	private String userId;
+	private String username;
 
-	public ChatRoom(String roomName, String topic) {
-		this.roomName = roomName;
-		this.topic = topic;
+	public ChatUser(String username) {
+		this.username = username;
 	}
 	
 	@Override

@@ -1,0 +1,28 @@
+.chat-bubble-container {
+    border: 0.5px solid #dedede;
+    /* background-color: #f1f1f1; */
+    border-radius: 5px;
+    padding: 10px;
+    margin: 10px 0;
+  }
+  
+  .darker {
+    border-color: #ccc;
+    /* background-color: #ddd; */
+  }
+  
+  .chat-bubble-container::after {
+    content: "";
+    clear: both;
+    display: table;
+  }
+
+  .text-right {
+    float: right;
+    color: #aaa;
+  }
+  
+  .text-left {
+    float: left;
+    color: #999;
+  }
