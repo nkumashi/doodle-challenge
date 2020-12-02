@@ -15,10 +15,10 @@
                 <form [formGroup]="form" (ngSubmit)="onSubmit(message.value)" (keyup.enter)="onSubmit(message.value)"
                     fxLayout="row" fxLayoutAlign="center baseline" fxLayoutGap="5px">
                     <mat-form-field class="full-width-input" fxFlex="90%">
-                        <input #message matInput placeholder="Message..." formControlName="message">
+                        <input #message matInput placeholder="Message..." formControlName="message" autofocus>
                     </mat-form-field>
 
-                    <button mat-raised-button color="primary" autocomplete="off" type="text" fxFlex>Send</button>
+                    <button #sendButton mat-raised-button color="primary" autocomplete="off" type="text" fxFlex>Send</button>
                 </form>
             </mat-card-content>
         </mat-card>
