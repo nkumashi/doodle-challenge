@@ -28,4 +28,8 @@ public class ChatUserService {
 	public ChatUser save(ChatUser user) {
 		return chatUserRepository.save(user);
 	}
+	
+	public void deleteAllRecords() {
+		chatUserRepository.deleteAll();
+    }
 }

@@ -1,12 +1,9 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { environment } from 'src/environments/environment';
 
-const REGISTER_API = '/api/user';
-
-const httpOptions = {
-    headers: new HttpHeaders({ 'Content-Type': 'application/json' })
-};
+const REGISTER_API_URL = '/api/user';
 
 @Injectable({
     providedIn: 'root'
@@ -24,9 +21,13 @@ export class AuthService {
         this.userRegistered = userRegistered;
     }
 
+    public unRegisterUser() {
+        this.userRegistered = false;
+    }
+
     register(user): Observable<any> {
-        return this.http.post(REGISTER_API, {
+        return this.http.post(environment.baseURL + REGISTER_API_URL, {
             username: user.username
-        }, httpOptions);
+        });
     }
 }

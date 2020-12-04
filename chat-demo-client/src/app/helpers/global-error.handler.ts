@@ -1,13 +1,11 @@
 import { ErrorHandler, Inject, Injectable } from '@angular/core';
 import * as uuid from 'uuid';
-import { RootInjectorGuard } from './root-injector.guard';
 
 @Injectable({
     providedIn: 'root'
 })
-export class GlobalErrorHandler extends RootInjectorGuard implements ErrorHandler {
+export class GlobalErrorHandler implements ErrorHandler {
     constructor() {
-        super(GlobalErrorHandler);
     }
 
     handleError(error: Error) {

@@ -1,0 +1,48 @@
+version: '3'
+services: 
+  mongo:
+    image: mongo:3.2.4
+    container_name: mongo
+    restart: always
+    ports:
+      - '27017:27017'    
+    networks:
+      - backendNetwork
+    command: --smallfiles
+      
+  server:
+    image: chat-demo-server
+    container_name: chat-demo-server
+    restart: always
+    #build: ./chat-demo-server
+    ports: 
+      - '8181:8181'
+    depends_on: 
+      - mongo
+    links: 
+      - mongo
+    networks:
+      - backendNetwork
+      - frontendNetwork
+      
+  client:
+    image: chat-demo-client
+    container_name: chat-demo-client
+    restart: always
+    #build: ./chat-demo-client
+    ports: 
+      - '4200:4200'
+    depends_on: 
+      - server
+    links: 
+      - server
+    networks:
+      - frontendNetwork
+  
+networks:
+  backendNetwork:
+    driver: bridge
+  frontendNetwork:
+    driver: bridge
+    
+    

@@ -42,26 +42,35 @@ public class WSChatController {
 		if(optionalRoom.isPresent()) {
 			// room already exists
 			globalRoom = optionalRoom.get();
+			log.info("Global room already exists: " + globalRoom);	
 		} else {
 			// creating the global room
 			globalRoom = chatRoomService.save(new ChatRoom(GLOBAL_ROOM_NAME, GLOBAL_ROOM_TOPIC));
-		}
-		log.info("Created global room: " + globalRoom);
+			log.info("Created global room: " + globalRoom);	
+		}					
 		
+		LocalDateTime now = LocalDateTime.now(); 
+		String dateString = now.getDayOfMonth() + " " + now.getMonth() + " " + now.getYear() + " " + getTime(now);
+		chatMessage.setCreatedAt(dateString);				 	
+		   
 		// let's save this chat message
 		ChatMessage message = new ChatMessage();		
 		message.setContent(chatMessage.getContent());		
 		message.setChatRoom(globalRoom);
+		message.setCreatedAt(now);
 		message.setSentByUser(chatUserService.findByUserId(chatMessage.getSentByUser().getUserId()).get());
-		message = chatMessageService.save(message);	
 		
-		LocalDateTime localDate = LocalDateTime.now();	
-		String dateString = localDate.getDayOfMonth() + " " + localDate.getMonth() + " " +
-				localDate.getYear() + " " + localDate.getHour() + ":" + localDate.getMinute();
-		chatMessage.setCreatedAt(dateString);
-		
-		log.info("Chat message saved: " + message);						
-		
+		ChatMessage savedMessage = chatMessageService.save(message);					
+		log.info("Chat message saved: " + savedMessage);						
+		//chatMessageService.deleteAllRecords();
+		//chatUserService.deleteAllRecords();
         return chatMessage;
+    }
+    
+    private String getTime(LocalDateTime now) {
+    	int hour = now.getHour();
+    	int minute = now.getMinute();
+    	
+    	return (hour < 10 ? "0" + hour : "" + hour) + ":" + (minute < 10 ? "0" + minute : "" + minute);
     }
 }

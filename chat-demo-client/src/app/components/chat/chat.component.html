@@ -1,7 +1,7 @@
 <mat-card>
     <mat-card-content>
         <mat-card>
-            <mat-card-content #messagesContainer class="container" [scrollTop]="messagesContainer.scrollHeight">
+            <mat-card-content #scrollFrame class="container">
                 <div *ngFor="let chatMessage of chatMessages">
                     <app-chat-bubble [chatMessage]="chatMessage"></app-chat-bubble>
                 </div>
@@ -15,10 +15,12 @@
                 <form [formGroup]="form" (ngSubmit)="onSubmit(message.value)" (keyup.enter)="onSubmit(message.value)"
                     fxLayout="row" fxLayoutAlign="center baseline" fxLayoutGap="5px">
                     <mat-form-field class="full-width-input" fxFlex="90%">
-                        <input #message matInput placeholder="Message..." formControlName="message" autofocus>
+                        <input #message matInput placeholder="Message..." formControlName="message"
+                            ng-model="textEntered" autofocus>
                     </mat-form-field>
 
-                    <button #sendButton mat-raised-button color="primary" autocomplete="off" type="text" fxFlex>Send</button>
+                    <button #sendButton mat-raised-button color="primary" autocomplete="off" type="text"
+                        fxFlex>Send</button>
                 </form>
             </mat-card-content>
         </mat-card>

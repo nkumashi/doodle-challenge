@@ -1,6 +1,6 @@
 package com.chat.challenge.model;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.DBRef;
@@ -30,7 +30,7 @@ public class ChatMessage {
 	private ChatUser sentByUser;
 	
 	private String content;
-	private Date createdAt;
+	private LocalDateTime createdAt;
 	
 //	private MessageType type;
 //	private MessageStatus status;

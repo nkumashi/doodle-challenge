@@ -1,7 +1,7 @@
-FROM openjdk:8
+FROM openjdk:8-jdk-alpine
 RUN mkdir -p /app
 WORKDIR /app
 COPY . /app
 RUN ./mvnw clean package
-ENTRYPOINT ["java", "-jar", "/app/target/chat-demo-server-0.0.1-SNAPSHOT.jar"]
-#EXPOSE 8080
+COPY ./target/*.jar app.jar
+ENTRYPOINT ["java", "-Dserver.port=8181", "-Dspring.data.mongodb.uri=mongodb://mongo:27017/test", "-Djava.security.egd=file:/dev/./urandom", "-jar", "/app/app.jar"]

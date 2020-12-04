@@ -4,15 +4,12 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
 import * as uuid from 'uuid';
-import 'rxjs/add/observable/throw';
-import { RootInjectorGuard } from './root-injector.guard';
 
 @Injectable({
     providedIn: 'root'
 })
-export class HttpErrorInterceptor extends RootInjectorGuard implements HttpInterceptor {
+export class HttpErrorInterceptor implements HttpInterceptor {
     constructor() {
-        super(HttpErrorInterceptor);
     }
 
     // the main interceptor method where all the action happens

@@ -1,8 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
+import { JsonConvert } from 'json2typescript';
+import { ChatUserDTO } from 'src/app/models/chat-user.dto';
 import { AuthService } from 'src/app/services/auth.service';
+import { SpinnerService } from 'src/app/services/spinner-service';
 import { UserService } from 'src/app/services/user.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-login',
@@ -11,15 +15,15 @@ import { UserService } from 'src/app/services/user.service';
 })
 export class LoginComponent implements OnInit {
   public form: FormGroup;
-  public loginInvalid: boolean;
-  private formSubmitAttempt: boolean;
+  public loginInvalid = true;
 
   constructor(
     private fb: FormBuilder,
-    private route: ActivatedRoute,
     private router: Router,
+    private toastr: ToastrService,
     private userService: UserService,
-    private authService: AuthService
+    private authService: AuthService,
+    private spinnerService: SpinnerService
   ) { }
 
   ngOnInit(): void {
@@ -29,31 +33,39 @@ export class LoginComponent implements OnInit {
   }
 
   async onSubmit() {
-    this.loginInvalid = false;
-    this.formSubmitAttempt = false;
-
     if (this.form.valid) {
       try {
         const username = this.form.get('username').value;
+
+        this.spinnerService.startSpinner();
         this.authService.register({ username }).subscribe(
           data => {
             console.log('Registration success: ' + JSON.stringify(data));
-            this.loginInvalid = false;
 
+            const jsonConvert: JsonConvert = new JsonConvert();
+            const chatUser: ChatUserDTO = jsonConvert.deserializeObject(data, ChatUserDTO);
+
+            this.loginInvalid = false;
+            this.spinnerService.stopSpinner();
             this.authService.setUserRegistered(true);
-            this.userService.setCurrentUser(data);
+            this.userService.setCurrentUser(chatUser);
             this.router.navigateByUrl('/chat');
           },
           err => {
             console.log('Registration error: ' + JSON.stringify(err));
+
             this.loginInvalid = true;
+            this.spinnerService.stopSpinner();
+            this.toastr.error('Registration failed. Please try again later.');
           }
         );
       } catch (err) {
         this.loginInvalid = true;
+        this.spinnerService.stopSpinner();
+        this.toastr.error('Registration failed. Please try again later.');
       }
     } else {
-      this.formSubmitAttempt = true;
+      this.loginInvalid = true;
     }
   }
 }
