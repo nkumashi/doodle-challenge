@@ -23,21 +23,22 @@ Running the application
 - Launch MongoDB using the command
 	docker-compose up -d
 
-	You will have to kill the server and client continers. Need to fix the docker setup.
+	You will have to kill the server and client containers. Need to fix the docker setup.
 
 - To run the server, navigate to the chat-demo-server folder and:
 	run: mvn spring-boot:run
 	
-	Or open the project in your IDE like Eclipse and run as Sprng Boot project.
+	Or open the project in your IDE like Eclipse and run as Spring Boot project.
 
 	- Links available:
 		- Host url: http://localhost:8181/wsChat
-		- Test api: http://localhost:8181/wsChat/home
+		- Test application: http://localhost:8181/wsChat/home
 		- Swagger api documentation: http://localhost:8181/wsChat/swagger-ui.html
 
 - To run the client, open the project in Visual Studio Code. Run:
 	ng serve
 
 Application resources available:
-	- Host URL: http://localhost:4200
+	- Links available:
+		- Host URL: http://localhost:4200
 
