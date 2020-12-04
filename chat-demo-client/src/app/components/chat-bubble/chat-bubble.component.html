@@ -1,6 +1,6 @@
 <div [ngClass]="(chatMessage.sentByUser.userId === userService.getCurrentUser().userId) ? 
-    'chat-bubble-container darker' : 'chat-bubble-container'">
-    <span [ngClass]="(chatMessage.sentByUser.userId === userService.getCurrentUser().userId) ? 'text-right' : 'text-left'">
+    'chat-bubble-container text-right' : 'chat-bubble-container text-left'">
+    <span class="child">
         <p>{{chatMessage.sentByUser.username}}</p>
         <p><b>{{chatMessage.content}}</b></p>
         <p>{{chatMessage.createdAt}}</p>
