@@ -1,5 +1,5 @@
-Spring Boot + Angular Socket + STOMP based chat application
-------------------------------------------------------------
+Spring Boot + Angular + WebSockets + STOMP based chat application
+------------------------------------------------------------------
 
 The main components of the application are:
 - Mongodb database
