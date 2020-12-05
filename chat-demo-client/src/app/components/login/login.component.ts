@@ -37,7 +37,7 @@ export class LoginComponent implements OnInit {
       try {
         const username = this.form.get('username').value;
 
-        this.spinnerService.startSpinner();
+        // this.spinnerService.startSpinner();
         this.authService.register({ username }).subscribe(
           data => {
             console.log('Registration success: ' + JSON.stringify(data));
@@ -46,7 +46,7 @@ export class LoginComponent implements OnInit {
             const chatUser: ChatUserDTO = jsonConvert.deserializeObject(data, ChatUserDTO);
 
             this.loginInvalid = false;
-            this.spinnerService.stopSpinner();
+            // this.spinnerService.stopSpinner();
             this.authService.setUserRegistered(true);
             this.userService.setCurrentUser(chatUser);
             this.router.navigateByUrl('/chat');
@@ -55,13 +55,13 @@ export class LoginComponent implements OnInit {
             console.log('Registration error: ' + JSON.stringify(err));
 
             this.loginInvalid = true;
-            this.spinnerService.stopSpinner();
+            // this.spinnerService.stopSpinner();
             this.toastr.error('Registration failed. Please try again later.');
           }
         );
       } catch (err) {
         this.loginInvalid = true;
-        this.spinnerService.stopSpinner();
+        // this.spinnerService.stopSpinner();
         this.toastr.error('Registration failed. Please try again later.');
       }
     } else {

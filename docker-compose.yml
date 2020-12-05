@@ -11,10 +11,9 @@ services:
     command: --smallfiles
       
   server:
-    image: chat-demo-server
+    image: naveenkumashi/chat-demo-server
     container_name: chat-demo-server
     restart: always
-    #build: ./chat-demo-server
     ports: 
       - '8181:8181'
     depends_on: 
@@ -26,10 +25,9 @@ services:
       - frontendNetwork
       
   client:
-    image: chat-demo-client
+    image: naveenkumashi/chat-demo-client
     container_name: chat-demo-client
     restart: always
-    #build: ./chat-demo-client
     ports: 
       - '4200:4200'
     depends_on: 

@@ -52,12 +52,15 @@ export class ChatComponent implements OnInit, AfterViewChecked {
       this.spinnerService.startSpinner();
       this.chatMessageService.fetchMessages().subscribe(
         data => {
-          console.log('Received messages from server: ' + JSON.stringify(data));
-
           this.spinnerService.stopSpinner();
-          data.forEach(element => {
-            this.chatMessages.push(element);
-          });
+          if (data) {
+            console.log('Received messages from server: ' + JSON.stringify(data));
+            data.forEach(element => {
+              this.chatMessages.push(element);
+            });
+          } else {
+            console.log('No data received from server...');
+          }
         },
         err => {
           this.spinnerService.stopSpinner();
